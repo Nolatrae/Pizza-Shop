@@ -4,13 +4,13 @@ import {addItem, minusItem, removeItem} from "../../features/cart/cartSlice";
 import closeIcon from '../../assets/img/closeIcon.svg'
 
 type CartItemProps = {
-  id: string,
-  title: string,
-  price: number,
-  imageUrl: string,
-  size: number,
-  type: string,
-  count: number
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  size: number;
+  type: string;
+  count: number;
 }
 
 const CartItem: React.FC<CartItemProps> = ({id,title,price,imageUrl,size,type,count}) => {

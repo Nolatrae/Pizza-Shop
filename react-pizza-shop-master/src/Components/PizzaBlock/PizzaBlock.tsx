@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
-import {addItem} from "../../features/cart/cartSlice";
+import { addItem, tCartItem } from "../../features/cart/cartSlice";
 
 const typesPizza = ['тонкое','традиционное'];
 const sizesPizza = ['26','30','40'];
@@ -10,7 +10,7 @@ type PizzaBlockProps = {
   id: number,
   title: string,
   price: number,
-  imageUrl: number,
+  imageUrl: string,
   sizes: number[],
   types: number[],
 }
@@ -25,13 +25,14 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({id,title,price,imageUrl,sizes,ty
     const addedPizza = cartItem ? cartItem.cout : 0
 
     function onClickAddPizzaBtn(){
-        const pizzaItem = {
+        const pizzaItem: tCartItem = {
             id,
             title,
             price,
             imageUrl,
             type:typesPizza[typePizza],
             size:sizesPizza[sizePizza],
+            count: 0,
         }
         dispatch(addItem(pizzaItem))
     }

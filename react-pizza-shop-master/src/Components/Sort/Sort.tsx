@@ -1,11 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { setChangeSort } from "../../features/filter/filterSlice";
-// import {doc} from "prettier";
 
 type SortItem = {
   name: string;
   criteriaSort: string;
+}
+
+type PopupClick = MouseEvent & {
+  path: Node[],
 }
 
 export const parameters: SortItem[] = [
@@ -28,8 +31,10 @@ const Sort = () => {
   }
 
   useEffect(() => {
-    const closeSortBlock = (e: any) => {
-      if (!e.path.includes(sortRef.current)) {
+    const closeSortBlock = (e: MouseEvent) => {
+      const _e = e as PopupClick;
+
+      if (sortRef.current && !_e.path.includes(sortRef.current)) {
         setOpen(false)
       }
     }

@@ -1,6 +1,18 @@
 import {createSlice} from "@reduxjs/toolkit";
+import type {PayloadAction} from "@reduxjs/toolkit"
 
-const initialState = {
+type Sort = {
+  name: string,
+  criteriaSort: 'rating' | 'title' | 'price' | '-rating' | '-title' | '-price';
+}
+
+type iFilterSliceState = {
+  categoryId:number;
+  currentPage:number;
+  sort: Sort;
+}
+
+const initialState : iFilterSliceState = {
     categoryId:0,
     currentPage:1,
     sort:{
@@ -13,19 +25,19 @@ export const filterSlice = createSlice({
     name:'filters',
     initialState,
     reducers:{
-        setCategoryId(state,action){
+        setCategoryId(state,action: PayloadAction<number>){
             state.categoryId = action.payload
         },
-        setChangeSort(state,action){
+        setChangeSort(state,action: PayloadAction<Sort>){
             state.sort = action.payload
         },
-        setCurrentPage(state,action){
+        setCurrentPage(state,action: PayloadAction<number>){
             state.currentPage = action.payload
         },
-        setFilters(state,action){
+        setFilters(state,action: PayloadAction<iFilterSliceState>){
             state.currentPage = Number(action.payload.currentPage)
             state.categoryId = Number(action.payload.categoryId)
-            state.sort = action.payload.sortTypeFing
+            state.sort = action.payload.sort
         }
 
     }
